@@ -95,32 +95,32 @@ defmodule GenServers do
 
   koan "Servers that are created and initialized successfully returns a tuple that holds the PID of the server" do
     {:ok, pid} = GenServer.start_link(Laptop, "3kr3t!")
-    assert is_pid(pid) == ___
+    assert is_pid(pid) == true
   end
 
   koan "The handle_call callback is synchronous so it will block until a reply is received" do
     {:ok, pid} = GenServer.start_link(Laptop, "3kr3t!")
-    assert GenServer.call(pid, :get_password) == ___
+    assert GenServer.call(pid, :get_password) == "3kr3t!"
   end
 
   koan "A server can support multiple actions by implementing multiple handle_call functions" do
     {:ok, pid} = GenServer.start_link(Laptop, "3kr3t!")
-    assert GenServer.call(pid, :get_manufacturer) == ___
-    assert GenServer.call(pid, :get_type) == ___
+    assert GenServer.call(pid, :get_manufacturer) == "Apple Inc."
+    assert GenServer.call(pid, :get_type) == "MacBook Pro"
   end
 
   koan "A handler can return multiple values and of different types" do
     {:ok, pid} = GenServer.start_link(Laptop, "3kr3t!")
     {:ok, processor, memory, graphics} = GenServer.call(pid, :get_specs)
-    assert processor == ___
-    assert memory == ___
-    assert graphics == ___
+    assert processor == ["2.9 GHz Intel Core i5"]
+    assert memory == 8192
+    assert graphics == :intel_iris_graphics
   end
 
   koan "The handle_cast callback handles asynchronous messages" do
     {:ok, pid} = GenServer.start_link(Laptop, "3kr3t!")
     GenServer.cast(pid, {:change_password, "3kr3t!", "73x7!n9"})
-    assert GenServer.call(pid, :get_password) == ___
+    assert GenServer.call(pid, :get_password) == "73x7!n9"
   end
 
   koan "Handlers can also return error responses" do
