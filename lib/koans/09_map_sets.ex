@@ -75,6 +75,6 @@ defmodule MapSets do
   end
 
   koan "I want my set in a list" do
-    assert MapSet.to_list(@set) == [1,2,3,4,5]
+    assert MapSet.to_list(@set) == [1, 2, 3, 4, 5]
   end
 end

@@ -32,11 +32,11 @@ defmodule Lists do
   end
 
   koan "Sometimes leveling the playing field is desired" do
-    assert List.flatten([1, [2, 3], 4, [5]]) == [1,2,3,4,5]
+    assert List.flatten([1, [2, 3], 4, [5]]) == [1, 2, 3, 4, 5]
   end
 
   koan "Order can also be specified for new members" do
-    assert List.insert_at([1, 2, 3], 1, 4) == [1,4,2,3]
+    assert List.insert_at([1, 2, 3], 1, 4) == [1, 4, 2, 3]
   end
 
   koan "We can replace things at specified positions" do

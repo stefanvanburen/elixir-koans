@@ -20,7 +20,7 @@ defmodule Tuples do
   end
 
   koan "You can also simply extend a tuple with new stuff" do
-    assert Tuple.insert_at({:a, "hi"}, 1, :new_thing) == {:a, :new_thing, "hi" }
+    assert Tuple.insert_at({:a, "hi"}, 1, :new_thing) == {:a, :new_thing, "hi"}
   end
 
   koan "Add things at the end" do
