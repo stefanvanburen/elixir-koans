@@ -125,29 +125,31 @@ defmodule GenServers do
 
   koan "Handlers can also return error responses" do
     {:ok, pid} = GenServer.start_link(Laptop, "3kr3t!")
-    assert GenServer.call(pid, {:unlock, "81u3pr!n7"}) == ___
+    assert GenServer.call(pid, {:unlock, "81u3pr!n7"}) == {:error, "Incorrect password!"}
   end
 
   koan "Referencing processes by their PID gets old pretty quickly, so let's name them" do
     {:ok, _} = GenServer.start_link(Laptop, "3kr3t!", name: :macbook)
-    assert GenServer.call(:macbook, :name_check) == ___
+
+    assert GenServer.call(:macbook, :name_check) ==
+             "Congrats! Your process was successfully named."
   end
 
   koan "Our server works but it's pretty ugly to use; so lets use a cleaner interface" do
     Laptop.start_link("EL!73")
-    assert Laptop.unlock("EL!73") == ___
+    assert Laptop.unlock("EL!73") == {:ok, "Laptop unlocked!"}
   end
 
   koan "Let's use the remaining functions in the external API" do
     Laptop.start_link("EL!73")
     {_, response} = Laptop.unlock("EL!73")
-    assert response == ___
+    assert response == "Laptop unlocked!"
 
     Laptop.change_password("EL!73", "Elixir")
     {_, response} = Laptop.unlock("EL!73")
-    assert response == ___
+    assert response == "Incorrect password!"
 
     {_, response} = Laptop.owner_name()
-    assert response == ___
+    assert response == "Jack Sparrow"
   end
 end
